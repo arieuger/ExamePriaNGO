@@ -59,9 +59,7 @@ public class Player : NetworkBehaviour
     [ServerRpc]
     internal void MoveToStartServerRpc()
     {
-        bool toLeft = Random.Range(0, 2) == 0;
-        float x = toLeft ? Random.Range(-9.5f, -3f) : Random.Range(3f, 9.5f);
-        transform.position = new Vector3(x, 1.2f, Random.Range(-3f, 3f)); ;
+        transform.position = GetRandomPosition();
     }
 
     [ClientRpc]
@@ -74,6 +72,18 @@ public class Player : NetworkBehaviour
     {
         mr.material = GameManager.Instance.materials[current];
         GameManager.Instance.CheckMovementActivation();
+    }
+
+    public void ServerMove()
+    {
+        transform.position = GetRandomPosition();
+    }
+
+    public static Vector3 GetRandomPosition()
+    {
+        bool toLeft = Random.Range(0, 2) == 0;
+        float x = toLeft ? Random.Range(-9.5f, -3f) : Random.Range(3f, 9.5f);
+        return new Vector3(x, 1.2f, Random.Range(-3f, 3f));
     }
 
     private void OnTriggerEnter(Collider other)

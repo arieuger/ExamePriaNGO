@@ -58,7 +58,7 @@ public class GameManager : NetworkBehaviour
             {
                 foreach (ulong uid in NetworkManager.Singleton.ConnectedClientsIds)
                 {
-                    NetworkManager.Singleton.SpawnManager.GetPlayerNetworkObject(uid).GetComponent<Player>().MoveToStartServerRpc();
+                    NetworkManager.Singleton.SpawnManager.GetPlayerNetworkObject(uid).GetComponent<Player>().ServerMove();
                 }
 
             }
